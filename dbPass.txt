@@ -1,0 +1,2 @@
+YjE2Qz2f1ZxN8R7c
+mongodb+srv://OdinInventoryAdmin:YjE2Qz2f1ZxN8R7c@cluster0.fzfcwnr.mongodb.net/Odin_inventory_application?retryWrites=true&w=majority
