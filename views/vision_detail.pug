@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+  h3 #{vision.name}
+    p #{vision.description}
+    h4 Characters
+
+    dl
+      each character in vision_characters
+        dt
+          a(href=character.url) #{character.name}
+        dd #{character.rarity} #{character.weapon}
+      else
+        p This vision has no characters

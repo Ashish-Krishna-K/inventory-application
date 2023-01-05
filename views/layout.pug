@@ -1,7 +1,23 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header 
+      h1 Genshin Characters Inventory
+    main 
+      block sidebar 
+        section.sidebar 
+          ul 
+            li 
+              a(href="/visions") Browse by Visions 
+            li 
+              a(href="/characters") All Characters 
+            li 
+              a(href="/character/create") Add new Character   
+      block content 
+    footer 
+      p Project by: Ashish-Krishna-K

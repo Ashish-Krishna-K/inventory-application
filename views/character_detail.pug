@@ -1,0 +1,11 @@
+extends layout 
+
+block content 
+  h3= title 
+  p #[strong] #{character.description}
+  p #[strong Vision: ] 
+    a(href="character.vision.url") #{character.vision.name} 
+  p #[strong Rarity: ] #{character.rarity}
+  p #[strong Weapon: ] #{character.weapon}
+  if character.constellationsOwned >= 0
+    p #[strong Constellation owned by admin: ] #{character.constellationsOwned}

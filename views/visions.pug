@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  ul
+    each vision in vision_list
+      li
+        a(href=vision.url) #{vision.name}
+    else
+      li There are no authors.

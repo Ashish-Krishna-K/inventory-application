@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h3= title 
+
+  ul 
+    each character in character_list
+      li 
+        a(href=character.url) #{character.name} 
+        | #{character.vision.name} 
+        | #{character.rarity} 
+        | #{character.weapon}
+    else 
+      li There are no Characters.

@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  section.content-body
+    h2= title
+    p Welcome to #{title}
+
+    h3 Home Page
+
+    if error 
+      p Error getting Dynamic content.
+    else 
+      p The Inventory has the following items: 
+        ul 
+          li #[strong Total Characters:] !{data.total_characters}
+          li #[strong Characters owned by Admin:] !{data.characters_owned}
