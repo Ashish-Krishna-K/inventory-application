@@ -2,9 +2,10 @@ extends layout
 
 block content 
   h3= title 
+  img(src=character.image, alt=character.name height=100 width=100)
   p #[strong] #{character.description}
   p #[strong Vision: ] 
-    a(href="character.vision.url") #{character.vision.name} 
+    a(href=character.vision.url) #{character.vision.name} 
   p #[strong Rarity: ] #{character.rarity}
   p #[strong Weapon: ] #{character.weapon}
   if character.constellationsOwned >= 0

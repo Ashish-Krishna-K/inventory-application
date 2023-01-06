@@ -2,6 +2,7 @@ const Vision = require('../models/vision');
 const Character = require('../models/character');
 
 const async = require("async");
+const { body, validationResult } = require("express-validator");
 
 
 exports.index = (req, res, next) => {
@@ -42,6 +43,9 @@ exports.vision_list = (req, res, next) => {
 exports.vision_detail = (req, res, next) => {
   async.parallel(
     {
+      characters_in_vision(callback) {
+        Character.countDocuments({ vision: req.params.id }, callback);
+      },
       visionInDetail(callback) {
         Vision.findById(req.params.id).exec(callback);
       },
@@ -61,6 +65,7 @@ exports.vision_detail = (req, res, next) => {
       res.render("vision_detail", {
         title: results.visionInDetail.name,
         vision: results.visionInDetail,
+        count_of_characters: results.characters_in_vision,
         vision_characters: results.vision_characters
       })
     }
@@ -69,13 +74,51 @@ exports.vision_detail = (req, res, next) => {
 
 // Display vision creation form on GET.
 exports.vision_create_get = (req, res, next) => {
-  res.send('not yet implemented');
+  res.render("vision_form", { title: "Create Vision" });
 };
 
 // Handles vision creation form submission.
-exports.vision_create_post = (req, res, next) => {
-  res.send('not yet implemented');
-};
+exports.vision_create_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Name is required")
+    .isAlpha()
+    .withMessage("Vision name must be letters"),
+  body("description")
+    .trim()
+    .optional({ checkFalsy: true }),
+  body("archon")
+    .trim()
+    .isAlpha()
+    .withMessage("Archon name must be letters")
+    .optional({ checkFalsy: true }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render("vision_form", {
+        title: "Create Vision",
+        vison: req.body,
+        errors: errors.array(),
+      });
+      return;
+    }
+    const vision = new Vision({
+      name: req.body.name,
+      description: req.body.description,
+      archon: req.body.archon,
+    });
+    vision.save((err) => {
+      if (err) {
+        next(err);
+      } else {
+        res.redirect(vision.url);
+      };
+    });
+  },
+];
 
 // Display vision edit form on GET.
 exports.vision_update_get = (req, res, next) => {

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const VisionSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String },
-  archon: { type: String, required: true },
+  archon: { type: String },
 });
 
 VisionSchema.virtual("url").get(function () {

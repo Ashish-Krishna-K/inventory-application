@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+  h3= title 
+
+  form(action="", method="post") 
+    label(for="name") Name: 
+    input(type="text" id="name" name="name" required="true" value=(undefined===vision ? '' : vision.name))
+    label(for="description") Description: 
+    textarea(id="description" name="description" value=(undefined===vision ? '' : vision.description))
+    label(for="archon") Archon: 
+    input(type="text" id="archon" name="name" value=(undefined===vision ? '' : vision.archon))
+    button(type="submit") Submit
+  if errors
+    ul 
+      for error in errors
+        li!= error.msg 

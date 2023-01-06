@@ -11,8 +11,13 @@ const CharacterSchema = new Schema({
   constellationsOwned: { type: Number },
 });
 
-CharacterSchema.virtual("url").get(function() {
+CharacterSchema.virtual("url").get(function () {
   return `/character/${this._id}`;
 });
+
+CharacterSchema.virtual("image").get(function () {
+  const sanitizedName = this.name.toLowerCase().replace(' ', '_');
+  return `../images/${sanitizedName}.webp`;
+})
 
 module.exports = mongoose.model("Character", CharacterSchema);

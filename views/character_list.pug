@@ -2,10 +2,10 @@ extends layout
 
 block content
   h3= title 
-
-  ul 
+  ul.display-characters 
     each character in character_list
       li 
+        img(src=character.image, alt=character.name height=100 width=100)
         a(href=character.url) #{character.name} 
         | #{character.vision.name} 
         | #{character.rarity} 

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const character_controller = require('../controllers/characterController');
 const vision_controller = require('../controllers/visionController');
 

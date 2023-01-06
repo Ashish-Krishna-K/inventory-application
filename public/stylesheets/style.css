@@ -19,7 +19,22 @@ main {
   display: flex;
 }
 
+.content {
+  width: 100%;
+}
 
+.display-characters {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.display-characters>li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 
 footer {
