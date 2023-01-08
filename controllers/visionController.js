@@ -13,7 +13,28 @@ exports.index = (req, res, next) => {
       },
       characters_owned(callback) {
         Character.countDocuments({ constellationsOwned: { $gte: 0 } }, callback);
-      }
+      },
+      fivestar_characters(callback) {
+        Character.countDocuments({ rarity: '5 star' }, callback);
+      },
+      fourstar_characters(callback) {
+        Character.countDocuments({ rarity: '4 star' }, callback);
+      },
+      sword_characters(callback) {
+        Character.countDocuments({ weapon: 'Sword' }, callback)
+      },
+      claymore_characters(callback) {
+        Character.countDocuments({ weapon: 'Claymore' }, callback)
+      },
+      polearm_characters(callback) {
+        Character.countDocuments({ weapon: 'Pole arm' }, callback)
+      },
+      bow_characters(callback) {
+        Character.countDocuments({ weapon: 'Bow' }, callback)
+      },
+      catalyst_characters(callback) {
+        Character.countDocuments({ weapon: 'Catalyst' }, callback)
+      },
     },
     (err, results) => {
       res.render("index", {
@@ -33,6 +54,7 @@ exports.vision_list = (req, res, next) => {
         next(err);
       } else {
         res.render("visions", {
+          title: "All Visions",
           vision_list: list_visions
         })
       }

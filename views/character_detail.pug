@@ -1,7 +1,7 @@
 extends layout 
 
 block content 
-  h3= title 
+  h2= title 
   img(src=character.imageURL, alt=character.name height=100 width=100)
   p #[strong] #{character.description}
   p #[strong Vision: ] 
@@ -11,8 +11,8 @@ block content
   if character.constellationsOwned >= 0
     p #[strong Constellation owned by admin: ] #{character.constellationsOwned}
 
-  hr
-  p 
-    a(href=character.url+'/delete') Delete Character
-  p 
-    a(href=character.url+'/update') Edit Character Details
+  div 
+    button  
+      a(href=character.url+'/delete') Delete Character
+    button  
+      a(href=character.url+'/update') Edit Character Details

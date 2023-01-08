@@ -4,19 +4,26 @@ html(lang='en')
     title= title
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="shortcut icon", href="https://genshin.hoyoverse.com/favicon.ico", type="image/x-icon")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     header 
-      h1 Genshin Characters Inventory
-    main 
-      block sidebar 
-        section.sidebar 
-          ul 
-            li 
+      a(href="/") 
+        h1 Genshin Characters Inventory
+    main  
+      nav.sidebar 
+        ul 
+          li 
+            h4 
+              a(href="/") Home
+          li 
+            h4
               a(href="/visions") Browse by Visions 
-            li 
+          li 
+            h4
               a(href="/characters") All Characters 
-            li 
+          li 
+            h4
               a(href="/character/create") Add new Character
       section.content   
         block content 

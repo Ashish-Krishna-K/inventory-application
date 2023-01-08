@@ -1,14 +1,13 @@
 extends layout
 
 block content
-  h3= title 
+  h2= title 
   ul.display-characters 
     each character in character_list
-      li 
+      li.character-modal 
         img(src=character.imageURL, alt=character.name height=100 width=100)
-        a(href=character.url) #{character.name} 
-        | #{character.vision.name} 
-        | #{character.rarity} 
-        | #{character.weapon}
+        h3 
+          a(href=character.url) #{character.name} 
+        p #{character.vision.name} #{character.rarity} #{character.weapon}
     else 
       li There are no Characters.

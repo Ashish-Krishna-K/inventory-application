@@ -1,11 +1,14 @@
 extends layout
 
 block content
-  ul
+  h2= title 
+
+  ul.visions-list
     each vision in vision_list
       li
         a(href=vision.url) #{vision.name}
     else
-      li There are no authors.
+      li There are no Visions.
 
-  a(href="/vision/create") Add new Vision. 
+  button 
+    a(href="/vision/create") Add new Vision 

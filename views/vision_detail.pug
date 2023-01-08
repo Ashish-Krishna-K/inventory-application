@@ -1,22 +1,24 @@
 extends layout
 
 block content
-
-  h3 #{vision.name}
-    p #{vision.description}
-    p #[strong Number of Characters with this vison: ] #{count_of_characters}
-    p   
-      a(href="/character/create") Add new Character
-    p
-      a(href=vision.url+'/update') Edit Vision Details 
-    p 
-      a(href=vision.url+'/delete') Delete this Vision
-    h4 Characters
+  h2 #{vision.name}
+  
+  p #{vision.description}
+  p #[strong Number of Characters with this vison: ] #{count_of_characters}
+  button    
+    a(href="/character/create") Add new Character
+  button 
+    a(href=vision.url+'/update') Edit Vision Details 
+  button  
+    a(href=vision.url+'/delete') Delete this Vision
+  h4 Characters
     
-    dl
-      each character in vision_characters
-        dt
-          a(href=character.url) #{character.name}
-        dd #{character.rarity} #{character.weapon}
-      else
-        p This vision has no characters
+  ul.display-characters.vision-characters
+    each character in vision_characters
+      li.character-modal 
+        img(src=character.imageURL, alt=character.name height=100 width=100)
+        h3 
+          a(href=character.url) #{character.name} 
+        p #{character.rarity} #{character.weapon} 
+    else
+      p This vision has no characters
