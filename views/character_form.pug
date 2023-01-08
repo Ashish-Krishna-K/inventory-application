@@ -12,7 +12,7 @@ block content
       option(value="") Select Vision 
       for vision in visions 
         if character 
-          option(value=vision._id selected=(vision._id.toString()===character.vision._id.toString() ? 'selected' : false)) #{vision.name} 
+          option(value=vision._id selected=(vision._id.toString()===character.vision._id.toString() || vision._id.toString()===character.vision ? 'selected' : false)) #{vision.name} 
         else 
           option(value=vision._id) #{vision.name}
     label(for="rarity") Rarity: 
@@ -60,7 +60,7 @@ block content
         option(value="5") C5  
         option(value="6") C6
     label(for="image") Add Image: 
-    input#image(type="file", name="image" required="true")
+    input#image(type="file" name="image" required="true" accept="image/png, image/jpeg, image/jpg, image/webp, image/gif")
     button(type="submit") Submit
   if errors
     ul 

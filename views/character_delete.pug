@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= character.name
+  p= character.vision.url
+  p= character.rarity
+  p= character.weapon
+
+  p Do you really want to delete this Character?
+
+  form(method='POST' action='')
+    input(type='hidden',name='characterid', required='true', value=character._id)
+
+    button(type='submit') Delete

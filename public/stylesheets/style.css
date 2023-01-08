@@ -19,6 +19,11 @@ main {
   display: flex;
 }
 
+a,
+a:visited {
+  color: blue;
+}
+
 .content {
   width: 100%;
 }

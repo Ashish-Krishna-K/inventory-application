@@ -2,7 +2,7 @@ extends layout
 
 block content 
   h3= title 
-  img(src=character.image, alt=character.name height=100 width=100)
+  img(src=character.imageURL, alt=character.name height=100 width=100)
   p #[strong] #{character.description}
   p #[strong Vision: ] 
     a(href=character.vision.url) #{character.vision.name} 
@@ -10,3 +10,9 @@ block content
   p #[strong Weapon: ] #{character.weapon}
   if character.constellationsOwned >= 0
     p #[strong Constellation owned by admin: ] #{character.constellationsOwned}
+
+  hr
+  p 
+    a(href=character.url+'/delete') Delete Character
+  p 
+    a(href=character.url+'/update') Edit Character Details

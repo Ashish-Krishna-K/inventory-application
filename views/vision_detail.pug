@@ -5,8 +5,14 @@ block content
   h3 #{vision.name}
     p #{vision.description}
     p #[strong Number of Characters with this vison: ] #{count_of_characters}
+    p   
+      a(href="/character/create") Add new Character
+    p
+      a(href=vision.url+'/update') Edit Vision Details 
+    p 
+      a(href=vision.url+'/delete') Delete this Vision
     h4 Characters
-
+    
     dl
       each character in vision_characters
         dt

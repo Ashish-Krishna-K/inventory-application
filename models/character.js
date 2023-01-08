@@ -9,15 +9,12 @@ const CharacterSchema = new Schema({
   rarity: { type: String, required: true },
   weapon: { type: String, required: true },
   constellationsOwned: { type: Number },
+  imageURL: { type: String, required: true },
 });
 
 CharacterSchema.virtual("url").get(function () {
   return `/character/${this._id}`;
 });
 
-CharacterSchema.virtual("image").get(function () {
-  const sanitizedName = this.name.toLowerCase().replace(' ', '_');
-  return `../images/${sanitizedName}.webp`;
-})
 
 module.exports = mongoose.model("Character", CharacterSchema);

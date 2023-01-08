@@ -48,13 +48,15 @@ function visionCreate(name, description, archon, cb) {
 }
 
 function characterCreate(name, description, vision, rarity, weapon, constellationsOwned, cb) {
+  const imageURL = `../images/${name.toLowerCase().replace(' ', '_')}.webp`
   characterdetail = {
     name,
     description,
     vision,
     rarity,
     weapon,
-    constellationsOwned
+    constellationsOwned,
+    imageURL,
   }
 
   var character = new Character(characterdetail);
