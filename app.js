@@ -5,11 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const compression = require("compression");
+const helmet = require("helmet");
 
 var app = express();
+
 const mongoose = require('mongoose');
-const mongoDB = "mongodb+srv://OdinInventoryAdmin:YjE2Qz2f1ZxN8R7c@cluster0.fzfcwnr.mongodb.net/Odin_inventory_application?retryWrites=true&w=majority";
+const dev_db_url = "mongodb+srv://OdinInventoryAdmin:YjE2Qz2f1ZxN8R7c@cluster0.fzfcwnr.mongodb.net/Odin_inventory_application?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -19,14 +22,15 @@ db.on("error", console.error.bind(console, "MongoDB connection error: "));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression()); // Compress all routes
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
