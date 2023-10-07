@@ -6,7 +6,9 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 
 import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
+import charactersRouter from './routes/characters.js';
+import visionsRouter from './routes/visions.js';
+import weaponsRouter from './routes/weapons.js';
 
 const app = express();
 
@@ -30,7 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/characters', charactersRouter);
+app.use('/visions', visionsRouter);
+app.use('/weapons/', weaponsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
