@@ -8,13 +8,13 @@ const VisionSchema = new Schema({
 });
 
 VisionSchema.virtual('url').get(function () {
-  return `/character/${this.id}`;
+  return `/visions/${this.id}`;
 });
 
 interface VisionModel extends InferSchemaType<typeof VisionSchema> {
   url: string;
 }
 
-const Character = mongoose.model<VisionModel>('Character', VisionSchema);
+const Vision = mongoose.model<VisionModel>('Vision', VisionSchema);
 
-export default Character;
+export default Vision;
