@@ -3,11 +3,21 @@ import express, { type Request, type Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 
 const app = express();
+
+const mongoDevDbUrl = 'mongodb+srv://admin:coV6ZlRuLh4ROEes@cluster0.tapiqdj.mongodb.net/?retryWrites=true&w=majority';
+(async () => {
+  try {
+    await mongoose.connect(mongoDevDbUrl);
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
