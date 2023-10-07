@@ -1,0 +1,11 @@
+Routes needed:
+
+1. index Route
+2. all characters route
+3. browse by rarity route
+4. browse by vision route
+5. browse by weapon route
+6. add new character
+7. edit a character
+8. delete a character
+9. 

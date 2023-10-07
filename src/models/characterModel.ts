@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const CharacterSchema = new Schema({
   name: { type: String, required: true },
+  description: {type: String, required: true},
   vision: { type: Schema.Types.ObjectId, ref: 'Vision', required: true },
   _rarity: { type: String, required: true, enum: ['5', '4'] },
   _weapon: { type: String, required: true, enum: ['BOW', 'CATALYST', 'CLAYMORE', 'SWORD', 'POLEARM'] },
