@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "build": "rimraf dist && npx tsc && cp -r src/public/ dist/ && cp -r src/views/ dist/",
+    "prestart": "npm run build",
+    "start": "DEBUG=inventory-application:* node ./bin/www",
+    "lint": "eslint src/**/*.ts --fix && npm run format",
+    "format": "prettier . --write",
+    "preserve": "npm run build",
+    "serve": "npx tsc -w & nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,8 +20,16 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.4",
     "@types/express": "^4.17.18",
+    "@types/morgan": "^1.9.6",
     "@types/node": "^20.8.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   }
 }
