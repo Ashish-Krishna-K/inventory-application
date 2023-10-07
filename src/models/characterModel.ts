@@ -21,10 +21,21 @@ CharacterSchema.virtual('weapon').get(function () {
   return `${this._weapon[0]}${this._weapon.slice(1).toLowerCase()}`;
 });
 
+CharacterSchema.virtual('imgUrl').get(function () {
+  let url = '';
+
+  const nameArray = this.name.split(' ');
+  if (nameArray.length < 2) url = `/character/image/${this.name.toLowerCase()}`;
+  url = nameArray.map((word) => word.toLowerCase()).join('_');
+
+  return url;
+});
+
 interface CharacterModel extends InferSchemaType<typeof CharacterSchema> {
   url: string;
   rarity: string;
   weapon: string;
+  imgUrl: string;
 }
 
 const Character = mongoose.model<CharacterModel>('Character', CharacterSchema);
