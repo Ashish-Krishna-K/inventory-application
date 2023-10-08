@@ -1,17 +1,29 @@
 <%- include('./header.ejs') %>
-<ul>
-  <% characters.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0).forEach(character => { %>
-    <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
-      <a href=<%= character.url %>>
-        <h3>
-          <%= character.name %>
-        </h3>
-        <img 
-          src=<%= character.imgPath %>
-          alt=<%= character.name %>
-        >
-      </a>
-    </li>
-  <% }) %>
-</ul>
+  <h2>
+    <%= title %>
+  </h2>
+  <% if (characters.length > 0) { %>
+    <ul>
+      <% characters.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0).forEach(character => { %>
+        <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+          <a href=<%= character.url %>>
+            <h3>
+              <%= character.name %>
+            </h3>
+            <img 
+              src=<%= character.imgPath %>
+              alt=<%= character.name %>
+            >
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>
+      There are no Characters in the inventory! 
+    </p>
+    <a href="/characters/create">
+      Add a new Character.
+     </a>
+  <% } %>
 <%- include('./footer.ejs') %>
