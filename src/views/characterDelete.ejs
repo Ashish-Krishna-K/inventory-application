@@ -1,0 +1,20 @@
+<%- include('./header.ejs') %>
+  <div>
+    <h2>
+      <%= character.name %>
+    </h2>
+    <img src=<%= character.imgPath %> alt=<%= `${character.name} avatar` %>>
+  </div>
+  <div>
+    <p>
+      <strong>
+        Do you really want to delete this character?
+      </strong>
+    </p>
+    <form action="" method="post">
+      <input type="hidden" name="id" value="character.id">
+      <button type="submit">Yes</button>
+      <button type="button" onclick="history.back()">No</button>
+    </form>
+</div>
+<%- include('./footer.ejs') %>

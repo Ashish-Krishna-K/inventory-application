@@ -1,3 +1,93 @@
 <%- include('./header.ejs') %>
-  <p>Everything's working great!</p>
+  <div>
+    <p>
+      <strong>
+        Total number of characters in inventory:
+      </strong>
+      <span>
+        <%= allCharactersCount %>
+      </span>
+    </p>
+    <table>
+      <caption>
+        Character Count by rarity
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            5 Star characters
+          </th>
+          <th>
+            4 Star characters
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= all5starsCount %>
+          </td>
+          <td>
+            <%= all4starsCount %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table>
+      <caption>
+        Character counts by vision type
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            Vision Type
+          </th>
+          <th>
+            Character Count
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allVisionsCount.forEach(vision => { %>
+          <tr>
+            <th>
+              <%= vision.name %>
+            </th>
+            <tr>
+              <%= vision.count %>
+            </tr>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <table>
+      <caption>
+        Character counts by weapon type
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            Weapon Type
+          </th>
+          <th>
+            Character Count
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allWeaponsCount.forEach(weapon => { %>
+          <tr>
+            <th>
+              <%= weapon.name %>
+            </th>
+            <tr>
+              <%= weapon.count %>
+            </tr>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 <%- include('./footer.ejs') %>
