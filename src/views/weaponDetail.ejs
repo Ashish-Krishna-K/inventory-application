@@ -1,0 +1,44 @@
+<%- include('./header.ejs') %>
+  <h2>
+    <%= title %>
+  </h2>
+  <div>
+    <p>
+      <a href=<%= `/weapon/${weapon.id}/edit` %>>
+        Edit Weapon Details
+      </a>
+    </p>
+    <p>
+      <a href=<%= `/weapons/${weapon.id}/delete` %>>
+        Delete this Weapon
+      </a>
+    </p>
+  </div>
+  <% if (characters.length > 0) { %>
+    <h3>
+      All characters bearing this weapon.
+    </h3>
+    <ul>
+      <% characters.forEach(character => { %>
+        <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+          <a href=<%= character.url %>>
+            <img 
+              src=<%= character.imgPath %> 
+              alt=<%= `${character.name} avatar` %>
+            >
+            <h4>
+              <%= character.name %>
+            </h4>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+   <p>
+    There is no characters bearing this weapon.
+   </p>
+   <a href="/characters/create">
+    Add a character.
+   </a>
+  <% } %>
+<%- include('./footer.ejs') %>

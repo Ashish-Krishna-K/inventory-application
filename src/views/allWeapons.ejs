@@ -1,0 +1,30 @@
+<%- include('./header.ejs') %>
+<h2>
+  <%= title %>
+</h2>
+<% if (weapons.length > 0) { %>
+  <ul>
+    <% weapons.forEach(weapon => { %>
+      <li>
+        <strong>
+          <a href=<%= weapon.url %>>
+            <%= weapon.name %>
+          </a>
+          :
+        </strong>
+        <span>
+          <%= weapon.characterCount %>
+          characters bear this weapon.
+        </span>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>
+    There are no Weapons in the inventory! 
+  </p>
+  <a href="/weapons/create">
+    Add a new Weapon.
+   </a>
+<% } %>
+<%- include('./footer.ejs') %>
