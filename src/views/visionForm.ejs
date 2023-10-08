@@ -1,0 +1,52 @@
+<%- include('./header.ejs') %>
+    <h2>
+      <%= title %>
+    </h2>
+    <form action="" method="post">
+      <div>
+        <label for="visionName">
+          Vision Name:
+        </label>
+        <input 
+        type="text"
+        id="visionName"
+        name="name"
+        required="true"
+        value=<%= typeof vision === "undefined" ? "" : vision.name %>
+        >
+        <% if (typeof errors !== "undefined") { %>
+          <% errors.forEach(error => { %>
+            <% if (error.location === "name") { %>
+              <span>
+                <%= error.msg %>
+              </span>
+            <% } %>
+          <% }) %>
+        <% } %>
+      </div>
+      <div>
+        <label for="description">
+          Description:
+        </label>
+        <textarea 
+          name="description" 
+          id="description" 
+          cols="30" 
+          rows="10"
+          required="true"
+        >
+          <%= typeof character === "undefined" ? "" : vision.description %>
+        </textarea>
+        <% if (typeof errors !== "undefined") { %>
+          <% errors.forEach(error => { %>
+            <% if (error.location === "description") { %>
+              <span>
+                <%= error.msg %>
+              </span>
+            <% } %>
+          <% }) %>
+        <% } %>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+<%- include('./footer.ejs') %>

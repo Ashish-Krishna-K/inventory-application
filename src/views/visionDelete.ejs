@@ -1,0 +1,19 @@
+<%- include('./header.ejs') %>
+  <div>
+    <h2>
+      <%= vision.name %>
+    </h2>
+  </div>
+  <div>
+    <p>
+      <strong>
+        Do you really want to delete this Vision?
+      </strong>
+    </p>
+    <form action="" method="post">
+      <input type="hidden" name="id" value=<%= vision.id %>>
+      <button type="submit">Yes</button>
+      <button type="button" onclick="history.back()">No</button>
+    </form>
+</div>
+<%- include('./footer.ejs') %>
