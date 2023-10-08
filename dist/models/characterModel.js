@@ -1,30 +1,31 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
 const Schema = mongoose_1.default.Schema;
 const CharacterSchema = new Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    vision: { type: Schema.Types.ObjectId, ref: 'Vision', required: true },
-    _rarity: { type: String, required: true, enum: ['5', '4'] },
-    weapon: { type: Schema.Types.ObjectId, ref: 'Weapon', required: true },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  vision: { type: Schema.Types.ObjectId, ref: 'Vision', required: true },
+  _rarity: { type: String, required: true, enum: ['5', '4'] },
+  weapon: { type: Schema.Types.ObjectId, ref: 'Weapon', required: true },
 });
 CharacterSchema.virtual('url').get(function () {
-    return `/characters/${this.id}`;
+  return `/characters/${this.id}`;
 });
 CharacterSchema.virtual('rarity').get(function () {
-    return `${this._rarity} star`;
+  return `${this._rarity} star`;
 });
 CharacterSchema.virtual('imgName').get(function () {
-    let url = '';
-    const nameArray = this.name.split(' ');
-    if (nameArray.length < 2)
-        url = this.name.toLowerCase();
-    url = nameArray.map((word) => word.toLowerCase()).join('_');
-    return url;
+  let url = '';
+  const nameArray = this.name.split(' ');
+  if (nameArray.length < 2) url = this.name.toLowerCase();
+  url = nameArray.map((word) => word.toLowerCase()).join('_');
+  return url;
 });
 const Character = mongoose_1.default.model('Character', CharacterSchema);
 exports.default = Character;

@@ -1,16 +1,18 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
 const Schema = mongoose_1.default.Schema;
 const VisionSchema = new Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
 });
 VisionSchema.virtual('url').get(function () {
-    return `/visions/${this.id}`;
+  return `/visions/${this.id}`;
 });
 const Vision = mongoose_1.default.model('Vision', VisionSchema);
 exports.default = Vision;

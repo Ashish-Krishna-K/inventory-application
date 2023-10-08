@@ -1,0 +1,122 @@
+<%- include('./header.ejs') %>
+  <form action="" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="charName">
+        Character Name:
+      </label>
+      <input 
+      type="text"
+      id="charName"
+      name="charName"
+      required="true"
+      value=<%= typeof character === "undefined" ? "" : character.name %>
+      >
+      <% if (typeof errors !== "undefined") { %>
+        <% errors.forEach(error => { %>
+          <% if (error.location === "charName") { %>
+            <span>
+              <%= error.msg %>
+            </span>
+          <% } %>
+        <% }) %>
+      <% } %>
+    </div>
+    <div>
+      <label for="description">
+        Description:
+      </label>
+      <textarea 
+        name="description" 
+        id="description" 
+        cols="30" 
+        rows="10"
+        required="true"
+      >
+        <%= typeof character === "undefined" ? "" : character.description %>
+      </textarea>
+      <% if (typeof errors !== "undefined") { %>
+        <% errors.forEach(error => { %>
+          <% if (error.location === "description") { %>
+            <span>
+              <%= error.msg %>
+            </span>
+          <% } %>
+        <% }) %>
+      <% } %>
+    </div>
+    <fieldset>
+      <legend>Select Rarity</legend>
+      <div>
+        <label for="5star">5 star</label>
+        <input 
+          type="radio" 
+          name="rarity" 
+          id="5star" 
+          required="true" 
+          value="5"
+          <%= typeof character !== "undefined" && character.rarity === "5" ? "checked" : "" %>
+        >
+      </div>
+      <div>
+        <label for="4star">4 star</label>
+        <input 
+          type="radio" 
+          name="rarity" 
+          id="4star" 
+          required="true" 
+          value="4"
+          <%= typeof character !== "undefined" && character.rarity === "4" ? "checked" : "" %>
+        >
+      </div>
+    </fieldset>
+    <div>
+      <label for="vision">Vision</label>
+      <select name="vision" id="vision">
+        <% visions.forEach(vision => { %>
+          <option 
+            value=<%= vision.id %>
+            <%= typeof character !== "undefined" && character.vision === vision.id ? "selectecd" : "" %>
+          >
+            <%= vision.name %>
+          </option>
+        <% }) %>
+      </select>
+      <% if (typeof errors !== "undefined") { %>
+        <% errors.forEach(error => { %>
+          <% if (error.location === "vision") { %>
+            <span>
+              <%= error.msg %>
+            </span>
+          <% } %>
+        <% }) %>
+      <% } %>
+    </div>
+    <div>
+      <label for="weapon">Weapon</label>
+      <select name="weapon" id="weapon">
+        <% weapons.forEach(weapon => { %>
+          <option 
+            value=<%= weapon.id %>
+            <%= typeof character !== "undefined" && character.weapon === weapon.id ? "selectecd" : "" %>
+          >
+            <%= weapon.name %>
+          </option>
+        <% }) %>
+      </select>
+      <% if (typeof errors !== "undefined") { %>
+        <% errors.forEach(error => { %>
+          <% if (error.location === "weapon") { %>
+            <span>
+              <%= error.msg %>
+            </span>
+          <% } %>
+        <% }) %>
+      <% } %>
+    </div>
+    <div>
+      <label for="charImg">Upload character image(only webp format is allowed)</label>
+      <input type="file" name="charImg" id="charImg" required="true" accept=".webp">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+<%- include('./footer.ejs') %>
