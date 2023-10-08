@@ -11,7 +11,6 @@ import {
 } from '../controllers/characterController';
 const router = express.Router();
 
-/* GET home page. */
 router.get('/', allCharactersGet);
 
 router.get('/create', addCharacterGet);
