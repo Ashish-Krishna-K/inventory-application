@@ -69,16 +69,15 @@ export const addCharacterPost = [
     const { name, description, vision, rarity, weapon } = req.body;
     const imgPath = req.file?.path;
     const character = new Character({
-      name,
+      _name: name,
+      _rarity: rarity,
       description,
       vision,
-      rarity,
       weapon,
       imgPath,
     });
 
     if (!errors.isEmpty()) {
-      console.log(errors.array());
       const [allWeapons, allVisions] = await Promise.all([Weapon.find().exec(), Vision.find().exec()]);
       const selectedWeapon = allWeapons.map((weapon) => ({
         ...weapon.toObject(),
@@ -114,7 +113,7 @@ export const editCharacterGet = async (req: Request, res: Response, next: NextFu
       Vision.find().exec(),
     ]);
     res.render('characterForm', {
-      title: 'Add Character',
+      title: 'Edit Character',
       character,
       weapons: allWeapons,
       visions: allVisions,
@@ -139,17 +138,16 @@ export const editCharacterPost = [
     const { name, description, vision, rarity, weapon } = req.body;
     const imgPath = req.file?.path;
     const character = new Character({
-      name,
+      _id: req.params.id,
+      _name: name,
+      _rarity: rarity,
       description,
       vision,
-      rarity,
       weapon,
       imgPath,
-      _id: req.params.id,
     });
 
     if (!errors.isEmpty()) {
-      console.log(errors.array());
       const [allWeapons, allVisions] = await Promise.all([Weapon.find().exec(), Vision.find().exec()]);
       const selectedWeapon = allWeapons.map((weapon) => ({
         ...weapon.toObject(),
@@ -160,7 +158,7 @@ export const editCharacterPost = [
         selected: vision.id === character.vision,
       }));
       res.render('characterForm', {
-        title: 'Add Character',
+        title: 'Edit Character',
         character,
         weapons: selectedWeapon,
         visions: selectedVision,
