@@ -198,7 +198,7 @@ export const deleteCharacterGet = async (req: Request, res: Response, next: Next
 
 export const deleteCharacterPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await Character.findByIdAndDelete(req.body.id);
+    await Character.findByIdAndDelete(req.body.id).exec();
     res.redirect('/characters');
   } catch (error) {
     next(error);
