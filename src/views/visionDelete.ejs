@@ -4,16 +4,39 @@
       <%= vision.name %>
     </h2>
   </div>
-  <div>
-    <p>
-      <strong>
-        Do you really want to delete this Vision?
-      </strong>
-    </p>
-    <form action="" method="post">
-      <input type="hidden" name="id" value=<%= vision.id %>>
-      <button type="submit">Yes</button>
-      <button type="button" onclick="history.back()">No</button>
-    </form>
-</div>
+  <% if (typeof characters !== "undefined" && characters.length > 0) { %>
+    <div>
+      <p>Please ensure to change the vision type of below characters before deleting this vision. Alternatively you can delete the characters</p>
+      <ul>
+        <ul>
+          <% characters.forEach(character => { %>
+            <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+              <a href=<%= character.url %>>
+                <img
+                  src=<%= character.imgPath %>
+                  alt=<%= `${character.name} avatar` %>
+                >
+                <h4>
+                  <%= character.name %>
+                </h4>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      </ul>
+    </div>
+  <% } else { %>
+    <div>
+      <p>
+        <strong>
+          Do you really want to delete this Vision?
+        </strong>
+      </p>
+      <form action="" method="post">
+        <input type="hidden" name="id" value=<%= vision.id %>>
+        <button type="submit">Yes</button>
+        <button type="button" onclick="history.back()">No</button>
+      </form>
+    </div>
+  <% } %>
 <%- include('./footer.ejs') %>

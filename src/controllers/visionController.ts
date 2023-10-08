@@ -73,9 +73,9 @@ export const addVisionPost = [
 
 export const editVisionGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const vision = await Vision.findById(req.params.id);
+    const vision = await Vision.findById(req.params.id).orFail(new Error('Vision not found.'));
     res.render('visionForm', {
-      title: 'Add Vision',
+      title: 'Edit Vision',
       vision,
     });
   } catch (error) {
@@ -95,7 +95,7 @@ export const editVisionPost = [
     });
     if (!errors.isEmpty()) {
       res.render('visionForm', {
-        title: 'Add Vision',
+        title: 'Edit Vision',
         vision,
         errors: errors.array(),
       });
@@ -113,10 +113,12 @@ export const editVisionPost = [
 export const deleteVisionGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const vision = await Vision.findById(req.params.id).exec();
+    const characters = await Character.find({ vision: req.params.id }).exec();
     if (vision === null) res.redirect('/visions');
     res.render('visionDelete', {
       title: 'Delete Vision',
       vision,
+      characters,
     });
   } catch (error) {
     next(error);
@@ -125,7 +127,16 @@ export const deleteVisionGet = async (req: Request, res: Response, next: NextFun
 
 export const deleteVisionPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await Vision.findByIdAndDelete(req.body.id);
+    const vision = await Vision.findById(req.params.id).exec();
+    const characters = await Character.find({ vision: req.params.id }).exec();
+    if (characters.length > 0) {
+      res.render('visionDelete', {
+        title: 'Delete Vision',
+        vision,
+        characters,
+      });
+    }
+    await Vision.findByIdAndDelete(req.body.id).exec();
     res.redirect('/visions');
   } catch (error) {
     next(error);
