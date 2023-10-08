@@ -1,0 +1,47 @@
+<%- include('./header.ejs') %>
+<div>
+  <h2>
+    <span>
+      <%= character.name %>
+    </span>
+    <span>
+      <%= character.rarity %>
+    </span>
+  </h2>
+  <img 
+    src=<%= character.imgPath %> 
+    alt=<%= `${character.name} avatar` %>
+  >
+  <p>
+    <%= character.description %>
+  </p>
+  <p>
+    <strong>
+      Vision:
+    </strong>
+    <a href=<%= character.vision.url %>>
+      <%= character.vision.name %>
+    </a>
+  </p>
+  <p>
+    <strong>
+      Weapon:
+    </strong>
+    <a href=<%= character.weapon.url %>>
+      <%= character.weapon.name %>
+    </a>
+  </p>
+</div>
+<div>
+  <p>
+    <a href=<%= `/characters/${character.id}/edit` %>>
+      Edit Character Details
+    </a>
+  </p>
+  <p>
+    <a href=<%= `/characters/${character.id}/delete` %>>
+      Delete Character
+    </a>
+  </p>
+</div>
+<%- include('./footer.ejs') %>
