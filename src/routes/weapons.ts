@@ -7,6 +7,7 @@ import {
   deleteWeaponPost,
   editWeaponGet,
   editWeaponPost,
+  singleWeaponCharactersGet,
 } from '../controllers/weaponController';
 const router = express.Router();
 
@@ -15,6 +16,8 @@ router.get('/', allWeaponsGet);
 router.get('/create', addWeaponGet);
 
 router.post('/create', addWeaponPost);
+
+router.get('/:id', singleWeaponCharactersGet);
 
 router.get('/:id/edit', editWeaponGet);
 

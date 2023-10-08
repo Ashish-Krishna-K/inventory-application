@@ -7,6 +7,7 @@ import {
   deleteVisionPost,
   editVisionGet,
   editVisionPost,
+  singleVisionCharactersGet,
 } from '../controllers/visionController';
 const router = express.Router();
 
@@ -15,6 +16,8 @@ router.get('/', allVisionsGet);
 router.get('/create', addVisionGet);
 
 router.post('/create', addVisionPost);
+
+router.get('/:id', singleVisionCharactersGet);
 
 router.get('/:id/edit', editVisionGet);
 
