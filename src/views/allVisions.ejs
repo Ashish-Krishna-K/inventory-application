@@ -1,30 +1,31 @@
 <%- include('./header.ejs') %>
-<h2>
-  <%= title %>
-</h2>
-<% if (visions.length > 0) { %>
-  <ul>
-    <% visions.forEach(vision => { %>
-      <li>
-        <strong>
-          <a href=<%= vision.url %>>
-            <%= vision.name %>
-          </a>
-          :
-        </strong>
-        <span>
-          <%= vision.characterCount %>
-          characters bear this vision.
-        </span>
-      </li>
-    <% }) %>
-  </ul>
-<% } else { %>
-  <p>
-    There are no Visions in the inventory! 
-  </p>
-  <a href="/visions/create">
-    Add a new Vision.
-   </a>
-<% } %>
+<main class="all-visions-page">
+  <h2>
+    <%= title %>
+  </h2>
+  <% if (visions.length > 0) { %>
+    <ul>
+      <% visions.forEach(vision => { %>
+        <li>
+          <strong>
+            <a href=<%= vision.url %>>
+              <%= vision.name %>:
+            </a>
+          </strong>
+          <span>
+            <%= vision.characterCount %>
+            characters bear this vision.
+          </span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>
+      There are no Visions in the inventory!
+    </p>
+    <a href="/visions/create">
+      Add a new Vision.
+     </a>
+  <% } %>
+</main>
 <%- include('./footer.ejs') %>

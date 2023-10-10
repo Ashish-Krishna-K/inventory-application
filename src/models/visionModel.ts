@@ -12,7 +12,11 @@ VisionSchema.virtual('url').get(function () {
 });
 
 VisionSchema.virtual('name').get(function () {
-  return `${this._name[0].toUpperCase()}${this._name.slice(1)}`;
+  // Capitalize every word in the name
+  return this._name
+    .split(' ')
+    .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+    .join(' ');
 });
 
 interface VisionModel extends InferSchemaType<typeof VisionSchema> {

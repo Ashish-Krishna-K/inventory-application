@@ -12,21 +12,26 @@ export const indexGet = async (req: Request, res: Response, next: NextFunction) 
       Weapon.find().exec(),
       Vision.find().exec(),
     ]);
-    const charactersByWeapon = allweapons.map(async (weapon) => {
-      const count = await Character.countDocuments({ weapon: weapon.id });
-      return {
-        name: weapon.name,
-        count,
-      };
-    });
-    const charactersByVision = allVisions.map(async (vision) => {
-      const count = await Character.countDocuments({ vision: vision.id });
-      return {
-        name: vision.name,
-        count,
-      };
-    });
-
+    // for each weapon type, count the number of characters associated with it
+    const charactersByWeapon = await Promise.all(
+      allweapons.map(async (weapon) => {
+        const count = await Character.countDocuments({ weapon: weapon.id });
+        return {
+          name: weapon.name,
+          count,
+        };
+      }),
+    );
+    // for each vision, count the number of characters associated with it
+    const charactersByVision = await Promise.all(
+      allVisions.map(async (vision) => {
+        const count = await Character.countDocuments({ vision: vision.id });
+        return {
+          name: vision.name,
+          count,
+        };
+      }),
+    );
     res.render('index', {
       title: 'Home',
       allCharactersCount,

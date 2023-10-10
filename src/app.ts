@@ -13,6 +13,7 @@ import weaponsRouter from './routes/weapons.js';
 const app = express();
 
 const mongoDevDbUrl = 'mongodb+srv://admin:coV6ZlRuLh4ROEes@cluster0.tapiqdj.mongodb.net/?retryWrites=true&w=majority';
+// Connect to mongodb database.
 (async () => {
   try {
     await mongoose.connect(mongoDevDbUrl);
@@ -29,8 +30,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// setting up routes
 app.use('/', indexRouter);
 app.use('/characters', charactersRouter);
 app.use('/visions', visionsRouter);

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "rimraf dist && npx tsc && cp -r src/public/ dist/ && cp -r src/views/ dist/",
+    "build": "rimraf dist && npx tsc && cp -r src/views/ dist/",
     "prestart": "npm run build",
     "start": "DEBUG=inventory-application:* node ./bin/www",
     "lint": "eslint src/**/*.ts --fix && npm run format",

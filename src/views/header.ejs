@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <title>
     <%= title %>
   </title>
@@ -13,4 +14,47 @@
       Genshin Characters Inventory
     </h1>
   </header>
-  <main>
+  <div id="content">
+    <aside>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/characters">
+              Browse all characters
+            </a>
+          </li>
+          <li>
+            <a href="/visions">
+              Browse characters by vision
+            </a>
+          </li>
+          <li>
+            <a href="/weapons">
+              Browse characters by weapon type
+            </a>
+          </li>
+        </ul>
+        <hr>
+        <ul>
+          <li>
+            <a href="/characters/create">
+              Add a new character
+            </a>
+          </li>
+          <li>
+            <a href="/visions/create">
+              Add a new vision
+            </a>
+          </li>
+          <li>
+            <a href="/weapons/create">
+              Add a new weapon type
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+

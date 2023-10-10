@@ -1,47 +1,54 @@
 <%- include('./header.ejs') %>
-  <h2>
-    <%= title %>
-  </h2>
-  <p>
-    <%= vision.description %>
-  </p>
-  <div>
+  <main class="vision-detail-page">
+    <h2>
+      <%= title %>
+    </h2>
     <p>
-      <a href=<%= `/visions/${vision.id}/edit` %>>
-        Edit Vision Details
-      </a>
+      <%= vision.description %>
     </p>
-    <p>
-      <a href=<%= `/visions/${vision.id}/delete` %>>
-        Delete this Vision
-      </a>
-    </p>
-  </div>
-  <% if (characters.length > 0) { %>
-    <h3>
-      All characters bearing this vision.
-    </h3>
-    <ul>
-      <% characters.forEach(character => { %>
-        <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
-          <a href=<%= character.url %>>
-            <img 
-              src=<%= character.imgPath %> 
-              alt=<%= `${character.name} avatar` %>
-            >
-            <h4>
-              <%= character.name %>
-            </h4>
-          </a>
-        </li>
-      <% }) %>
-    </ul>
-  <% } else { %>
-   <p>
-    There is no characters bearing this vision.
-   </p>
-   <a href="/characters/create">
-    Add a character.
-   </a>
-  <% } %>
+    <div class="controls">
+      <p>
+        <a href=<%= `/visions/${vision.id}/edit` %>>
+          Edit Vision Details
+        </a>
+      </p>
+      <p>
+        <a href=<%= `/visions/${vision.id}/delete` %>>
+          Delete this Vision
+        </a>
+      </p>
+    </div>
+    <div class="list-container">
+      <% if (characters.length > 0) { %>
+        <h3>
+          All characters bearing this vision.
+        </h3>
+        <ul class="character-list">
+          <% characters.forEach(character => { %>
+            <li>
+              <a href=<%= character.url %> class="character">
+                <!-- if character rarity is 5 stars display gold background, if it's 4 stars display purple background -->
+                <div class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+                  <img
+                    src=<%= `/images/${character.imgPath}` %>
+                    alt="<%= `${character.name} avatar` %>"
+                  >
+                </div>
+                <h4>
+                  <%= character.name %>
+                </h4>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+       <p>
+        There is no characters bearing this vision.
+       </p>
+       <a href="/characters/create">
+        Add a character.
+       </a>
+      <% } %>
+    </div>
+  </main>
 <%- include('./footer.ejs') %>

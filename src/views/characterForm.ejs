@@ -1,133 +1,165 @@
 <%- include('./header.ejs') %>
-  <% if (visions.length < 1) { %>
-   <p>There is no visions in the inventory! You need to add atleast one vision before adding a character.</p>
-   <a href="/visions/create">Add a vision</a>
-  <% } else if (weapons.length) { %>
-    <p>There is no weapons in the inventory! You need to add atleast one weapon before adding a character.</p>
-    <a href="/weapon/create">Add a weapon</a>
-  <% } else { %>
-    <h2>
-      <%= title %>
-    </h2>
-    <form action="" method="post" enctype="multipart/form-data">
-      <div>
-        <label for="charName">
-          Character Name:
-        </label>
-        <input 
-        type="text"
-        id="charName"
-        name="charName"
-        required="true"
-        value=<%= typeof character === "undefined" ? "" : character.name %>
-        >
-        <% if (typeof errors !== "undefined") { %>
-          <% errors.forEach(error => { %>
-            <% if (error.location === "charName") { %>
-              <span>
-                <%= error.msg %>
-              </span>
+  <main class="add-character-page">
+    <% if (visions.length < 1) { %>
+     <p>There is no visions in the inventory! You need to add atleast one vision before adding a character.</p>
+     <a href="/visions/create">Add a vision</a>
+    <% } else if (weapons.length < 1) { %>
+      <p>There is no weapons in the inventory! You need to add atleast one weapon before adding a character.</p>
+      <a href="/weapon/create">Add a weapon</a>
+    <% } else { %>
+      <h2>
+        <%= title %>
+      </h2>
+      <div class="form-container">
+        <form action="" method="post" enctype="multipart/form-data" class="add-character">
+          <div class="name-input">
+            <label for="charName">
+              Character Name:
+            </label>
+            <% if (typeof errors !== "undefined") { %>
+              <% errors.forEach(error => { %>
+                <% if (error.path === "charName") { %>
+                  <span class="error">
+                    <%= error.msg %>
+                  </span>
+                <% } %>
+              <% }) %>
             <% } %>
-          <% }) %>
-        <% } %>
-      </div>
-      <div>
-        <label for="description">
-          Description:
-        </label>
-        <textarea 
-          name="description" 
-          id="description" 
-          cols="30" 
-          rows="10"
-          required="true"
-        >
-          <%= typeof character === "undefined" ? "" : character.description %>
-        </textarea>
-        <% if (typeof errors !== "undefined") { %>
-          <% errors.forEach(error => { %>
-            <% if (error.location === "description") { %>
-              <span>
-                <%= error.msg %>
-              </span>
-            <% } %>
-          <% }) %>
-        <% } %>
-      </div>
-      <fieldset>
-        <legend>Select Rarity</legend>
-        <div>
-          <label for="5star">5 star</label>
-          <input 
-            type="radio" 
-            name="rarity" 
-            id="5star" 
-            required="true" 
-            value="5"
-            <%= typeof character !== "undefined" && character.rarity === "5" ? "checked" : "" %>
-          >
-        </div>
-        <div>
-          <label for="4star">4 star</label>
-          <input 
-            type="radio" 
-            name="rarity" 
-            id="4star" 
-            required="true" 
-            value="4"
-            <%= typeof character !== "undefined" && character.rarity === "4" ? "checked" : "" %>
-          >
-        </div>
-      </fieldset>
-      <div>
-        <label for="vision">Vision</label>
-        <select name="vision" id="vision" required="true">
-          <% visions.forEach(vision => { %>
-            <option 
-              value=<%= vision.id %>
-              <%= typeof character !== "undefined" && character.vision === vision.id ? "selectecd" : "" %>
+            <input
+            type="text"
+            id="charName"
+            name="charName"
+            required="true"
+            value="<%= typeof character === "undefined" ? "" : character.name %>"
             >
-              <%= vision.name %>
-            </option>
-          <% }) %>
-        </select>
-        <% if (typeof errors !== "undefined") { %>
-          <% errors.forEach(error => { %>
-            <% if (error.location === "vision") { %>
-              <span>
-                <%= error.msg %>
-              </span>
+          </div>
+          <div class="desc-input">
+            <label for="description">
+              Description:
+            </label>
+            <% if (typeof errors !== "undefined") { %>
+              <% errors.forEach(error => { %>
+                <% if (error.path === "description") { %>
+                  <span class="error">
+                    <%= error.msg %>
+                  </span>
+                <% } %>
+              <% }) %>
             <% } %>
-          <% }) %>
-        <% } %>
-      </div>
-      <div>
-        <label for="weapon">Weapon</label>
-        <select name="weapon" id="weapon" required="true">
-          <% weapons.forEach(weapon => { %>
-            <option 
-              value=<%= weapon.id %>
-              <%= typeof character !== "undefined" && character.weapon === weapon.id ? "selectecd" : "" %>
-            >
-              <%= weapon.name %>
-            </option>
-          <% }) %>
-        </select>
-        <% if (typeof errors !== "undefined") { %>
-          <% errors.forEach(error => { %>
-            <% if (error.location === "weapon") { %>
-              <span>
-                <%= error.msg %>
-              </span>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              required="true"
+            ><%= typeof character === "undefined" ? "" : character.description %></textarea>
+          </div>
+          <fieldset class="rarity-input">
+            <legend>Select Rarity</legend>
+            <div>
+              <input
+                type="radio"
+                name="rarity"
+                id="5star"
+                required="true"
+                value="5"
+                <%= typeof character !== "undefined" && character.rarity === "5" ? "checked" : "" %>
+              >
+              <label for="5star">5 star</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="rarity"
+                id="4star"
+                required="true"
+                value="4"
+                <%= typeof character !== "undefined" && character.rarity === "4" ? "checked" : "" %>
+              >
+              <label for="4star">4 star</label>
+            </div>
+            <% if (typeof errors !== "undefined") { %>
+              <% errors.forEach(error => { %>
+                <% if (error.path === "rarity") { %>
+                  <span class="error">
+                    <%= error.msg %>
+                  </span>
+                <% } %>
+              <% }) %>
             <% } %>
-          <% }) %>
-        <% } %>
+          </fieldset>
+          <div class="select-inputs">
+            <div>
+              <label for="vision">Vision</label>
+              <% if (typeof errors !== "undefined") { %>
+                <% errors.forEach(error => { %>
+                  <% if (error.path === "vision") { %>
+                    <span class="error">
+                      <%= error.msg %>
+                    </span>
+                  <% } %>
+                <% }) %>
+              <% } %>
+              <select name="vision" id="vision" required="true">
+                <option value="" selected disabled hidden>Vison</option>
+                <% visions.forEach(vision => { %>
+                  <option
+                    value=<%= vision.id %>
+                    <%= typeof character !== "undefined" && character.vision === vision.id ? "selected" : "" %>
+                  >
+                    <%= vision.name %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+            <div>
+              <label for="weapon">Weapon</label>
+              <% if (typeof errors !== "undefined") { %>
+                <% errors.forEach(error => { %>
+                  <% if (error.path === "weapon") { %>
+                    <span class="error">
+                      <%= error.msg %>
+                    </span>
+                  <% } %>
+                <% }) %>
+              <% } %>
+              <select name="weapon" id="weapon" required="true">
+                <option value="" selected disabled hidden>Weapon</option>
+                <% weapons.forEach(weapon => { %>
+                  <option
+                    value=<%= weapon.id %>
+                    <%= typeof character !== "undefined" && character.weapon === weapon.id ? "selected" : "" %>
+                  >
+                    <%= weapon.name %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="file-upload">
+            <label for="charImg">
+              Upload character image
+              <span>
+                (only webp format is allowed)
+              </span>
+            </label>
+            <% if (typeof errors !== "undefined") { %>
+              <% errors.forEach(error => { %>
+                <% if (error.path === "charImg") { %>
+                  <span class="error">
+                    <%= error.msg %>
+                  </span>
+                <% } %>
+              <% }) %>
+            <% } %>
+            <input type="file" name="charImg" id="charImg" required="true" accept=".webp">
+          </div>
+          <div class="form-btns">
+            <button type="submit">Submit</button>
+            <button type="button" onclick="history.back()">Cancel</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label for="charImg">Upload character image(only webp format is allowed)</label>
-        <input type="file" name="charImg" id="charImg" required="true" accept=".webp">
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  <% } %>
+    <% } %>
+  </main>
 <%- include('./footer.ejs') %>

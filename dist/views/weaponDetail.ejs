@@ -1,27 +1,24 @@
 <%- include('./header.ejs') %>
-  <main class="vision-detail-page">
+  <main class="weapon-detail-page">
     <h2>
       <%= title %>
     </h2>
-    <p>
-      <%= vision.description %>
-    </p>
     <div class="controls">
       <p>
-        <a href=<%= `/visions/${vision.id}/edit` %>>
-          Edit Vision Details
+        <a href=<%= `/weapons/${weapon.id}/edit` %>>
+          Edit Weapon Details
         </a>
       </p>
       <p>
-        <a href=<%= `/visions/${vision.id}/delete` %>>
-          Delete this Vision
+        <a href=<%= `/weapons/${weapon.id}/delete` %>>
+          Delete this Weapon
         </a>
       </p>
     </div>
     <div class="list-container">
       <% if (characters.length > 0) { %>
         <h3>
-          All characters bearing this vision.
+          All characters bearing this weapon.
         </h3>
         <ul class="character-list">
           <% characters.forEach(character => { %>
@@ -42,7 +39,7 @@
         </ul>
       <% } else { %>
        <p>
-        There is no characters bearing this vision.
+        There is no characters bearing this weapon.
        </p>
        <a href="/characters/create">
         Add a character.

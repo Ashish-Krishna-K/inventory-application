@@ -1,20 +1,24 @@
 <%- include('./header.ejs') %>
-  <div>
-    <h2>
-      <%= character.name %>
-    </h2>
-    <img src=<%= character.imgPath %> alt=<%= `${character.name} avatar` %>>
-  </div>
-  <div>
-    <p>
-      <strong>
-        Do you really want to delete this character?
-      </strong>
-    </p>
-    <form action="" method="post">
-      <input type="hidden" name="id" value="character.id">
-      <button type="submit">Yes</button>
-      <button type="button" onclick="history.back()">No</button>
-    </form>
-</div>
+  <main class="character-delete-page">
+    <div>
+      <h2>
+        <%= character.name %>
+      </h2>
+      <img src=<%= `/images/${character.imgPath}` %> alt=<%= `${character.name} avatar` %>>
+    </div>
+    <div>
+      <p>
+        <strong>
+          Do you really want to delete this character?
+        </strong>
+      </p>
+      <form action="" method="post" class="delete-form">
+        <input type="hidden" name="id" value=<%= character.id %>>
+        <div class="controls">
+          <button type="submit">Yes</button>
+          <button type="button" onclick="history.back()">No</button>
+        </div>
+      </form>
+    </div>
+  </main>
 <%- include('./footer.ejs') %>

@@ -10,20 +10,14 @@
               Weapon Name:
             </label>
             <% if (typeof errors !== "undefined") { %>
-              <!-- errors exist display error -->
               <% errors.forEach(error => { %>
                 <% if (error.path === "name") { %>
-                  <!-- error is on the name input -->
                   <span class="error">
                     <%= error.msg %>
                   </span>
                 <% } %>
               <% }) %>
             <% } %>
-            <!-- 
-              if a weapon object is provided it's not undefined, display 
-              the name as the input value. 
-            -->
             <input
             type="text"
             id="visionName"
@@ -31,6 +25,7 @@
             required="true"
             value="<%= typeof weapon !== "undefined" ? weapon.name : "" %>"
             >
+        
           </div>
           <div class="form-btns">
             <button type="submit">Submit</button>

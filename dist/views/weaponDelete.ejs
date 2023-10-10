@@ -1,43 +1,40 @@
 <%- include('./header.ejs') %>
-  <main class="delete-vision-page">
+  <main class="delete-weapon-page">
     <div>
       <h2>
-        <%= vision.name %>
+        <%= weapon.name %>
       </h2>
     </div>
     <% if (typeof characters !== "undefined" && characters.length > 0) { %>
-      <!-- There are characters with this vision, prompt user to delete the character/change vision -->
       <div>
         <p>Please ensure to change the vision type of below characters before deleting this vision. Alternatively you can delete the characters</p>
-        <div class="list-container">
-          <ul class="character-list">
+        <ul>
+          <ul>
             <% characters.forEach(character => { %>
-              <li>
-                <a href=<%= character.url %> class="character">
-                  <div class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
-                    <img
-                      src=<%= character.imgPath %>
-                      alt=<%= `${character.name} avatar` %>
-                    >
-                  </div>
+              <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+                <a href=<%= character.url %>>
+                  <img
+                    src=<%= character.imgPath %>
+                    alt=<%= `${character.name} avatar` %>
+                  >
                   <h4>
                     <%= character.name %>
                   </h4>
                 </a>
               </li>
             <% }) %>
+          </ul>
         </ul>
-        </div>
       </div>
     <% } else { %>
       <div>
         <p>
           <strong>
-            Do you really want to delete this Vision?
+            Do you really want to delete this Weapon?
           </strong>
         </p>
         <form action="" method="post" class="delete-form">
-          <input type="hidden" name="id" value=<%= vision.id %>>
+          <input type="hidden" name="id" value=<%= weapon.id %>>
           <div class="controls">
             <button type="submit">Yes</button>
             <button type="button" onclick="history.back()">No</button>

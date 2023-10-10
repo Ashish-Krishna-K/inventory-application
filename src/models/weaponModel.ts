@@ -7,11 +7,15 @@ const WeaponSchema = new Schema({
 });
 
 WeaponSchema.virtual('url').get(function () {
-  return `/visions/${this.id}`;
+  return `/weapons/${this.id}`;
 });
 
 WeaponSchema.virtual('name').get(function () {
-  return `${this._name[0].toUpperCase()}${this._name.slice(1)}`;
+  // Capitalize every word in the name
+  return this._name
+    .split(' ')
+    .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+    .join(' ');
 });
 
 interface WeaponModel extends InferSchemaType<typeof WeaponSchema> {
