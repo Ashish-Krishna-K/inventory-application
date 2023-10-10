@@ -1,21 +1,23 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
 const Schema = mongoose_1.default.Schema;
 const WeaponSchema = new Schema({
-    _name: { type: String, required: true, lowercase: true },
+  _name: { type: String, required: true, lowercase: true },
 });
 WeaponSchema.virtual('url').get(function () {
-    return `/weapons/${this.id}`;
+  return `/weapons/${this.id}`;
 });
 WeaponSchema.virtual('name').get(function () {
-    return this._name
-        .split(' ')
-        .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
-        .join(' ');
+  return this._name
+    .split(' ')
+    .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+    .join(' ');
 });
 const Weapon = mongoose_1.default.model('Weapon', WeaponSchema);
 exports.default = Weapon;

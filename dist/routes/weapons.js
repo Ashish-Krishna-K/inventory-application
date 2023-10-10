@@ -1,10 +1,12 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const weaponController_1 = require("../controllers/weaponController");
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const express_1 = __importDefault(require('express'));
+const weaponController_1 = require('../controllers/weaponController');
 const router = express_1.default.Router();
 router.get('/', weaponController_1.allWeaponsGet);
 router.get('/create', weaponController_1.addWeaponGet);

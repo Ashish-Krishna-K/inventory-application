@@ -1,23 +1,24 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
 const Schema = mongoose_1.default.Schema;
 const VisionSchema = new Schema({
-    _name: { type: String, required: true, lowercase: true },
-    description: { type: String, required: true },
+  _name: { type: String, required: true, lowercase: true },
+  description: { type: String, required: true },
 });
 VisionSchema.virtual('url').get(function () {
-    return `/visions/${this.id}`;
+  return `/visions/${this.id}`;
 });
 VisionSchema.virtual('name').get(function () {
-    return this._name
-        .split(' ')
-        .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
-        .join(' ');
-    ;
+  return this._name
+    .split(' ')
+    .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+    .join(' ');
 });
 const Vision = mongoose_1.default.model('Vision', VisionSchema);
 exports.default = Vision;

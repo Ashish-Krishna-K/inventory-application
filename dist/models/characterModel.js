@@ -1,26 +1,28 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
 const Schema = mongoose_1.default.Schema;
 const CharacterSchema = new Schema({
-    _name: { type: String, required: true, lowercase: true },
-    rarity: { type: String, required: true, enum: ['5', '4'] },
-    description: { type: String, required: true },
-    vision: { type: Schema.Types.ObjectId, ref: 'Vision', required: true },
-    weapon: { type: Schema.Types.ObjectId, ref: 'Weapon', required: true },
-    imgPath: { type: String, required: true },
+  _name: { type: String, required: true, lowercase: true },
+  rarity: { type: String, required: true, enum: ['5', '4'] },
+  description: { type: String, required: true },
+  vision: { type: Schema.Types.ObjectId, ref: 'Vision', required: true },
+  weapon: { type: Schema.Types.ObjectId, ref: 'Weapon', required: true },
+  imgPath: { type: String, required: true },
 });
 CharacterSchema.virtual('url').get(function () {
-    return `/characters/${this.id}`;
+  return `/characters/${this.id}`;
 });
 CharacterSchema.virtual('name').get(function () {
-    return this._name
-        .split(' ')
-        .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
-        .join(' ');
+  return this._name
+    .split(' ')
+    .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
+    .join(' ');
 });
 const Character = mongoose_1.default.model('Character', CharacterSchema);
 exports.default = Character;
