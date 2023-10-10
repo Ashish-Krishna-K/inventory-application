@@ -1,6 +1,6 @@
 # Inventory Application
 
-[Live Demo]()
+[Live Demo](https://genshin-characters-inventory.onrender.com)
 
 A basic inventory application project as part of [The Odin Project's](https://www.theodinproject.com/dashboard) NodeJS course.
 
