@@ -24,10 +24,11 @@
           <% characters.forEach(character => { %>
             <li>
               <a href=<%= character.url %> class="character">
+                <!-- display gold background if character rarity is 5 stars and purple if it's 4 stars -->
                 <div class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
                   <img
                     src=<%= `/images/${character.imgPath}` %>
-                    alt=<%= `${character.name} avatar` %>
+                    alt="<%= `${character.name} avatar` %>"
                   >
                 </div>
                 <h4>

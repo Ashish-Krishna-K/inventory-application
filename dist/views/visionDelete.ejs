@@ -6,25 +6,28 @@
       </h2>
     </div>
     <% if (typeof characters !== "undefined" && characters.length > 0) { %>
+      <!-- There are characters with this vision, prompt user to delete the character/change vision -->
       <div>
         <p>Please ensure to change the vision type of below characters before deleting this vision. Alternatively you can delete the characters</p>
-        <ul>
-          <ul>
+        <div class="list-container">
+          <ul class="character-list">
             <% characters.forEach(character => { %>
-              <li class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
-                <a href=<%= character.url %>>
-                  <img
-                    src=<%= character.imgPath %>
-                    alt=<%= `${character.name} avatar` %>
-                  >
+              <li>
+                <a href=<%= character.url %> class="character">
+                  <div class=<%= character.rarity === "5" ? "five-star" : "four-star" %>>
+                    <img
+                      src=<%= character.imgPath %>
+                      alt=<%= `${character.name} avatar` %>
+                    >
+                  </div>
                   <h4>
                     <%= character.name %>
                   </h4>
                 </a>
               </li>
             <% }) %>
-          </ul>
         </ul>
+        </div>
       </div>
     <% } else { %>
       <div>

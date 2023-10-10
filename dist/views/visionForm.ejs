@@ -10,14 +10,17 @@
               Vision Name:
             </label>
             <% if (typeof errors !== "undefined") { %>
+              <!-- errors exist display error -->
               <% errors.forEach(error => { %>
                 <% if (error.path === "name") { %>
+                  <!-- error is in the name field display the error -->
                   <span class="error">
                     <%= error.msg %>
                   </span>
                 <% } %>
               <% }) %>
             <% } %>
+            <!-- if vision object exists, display vision name as value -->
             <input
             type="text"
             id="visionName"
@@ -34,12 +37,14 @@
             <% if (typeof errors !== "undefined") { %>
               <% errors.forEach(error => { %>
                 <% if (error.path === "description") { %>
+                  <!-- error is in description field, display error -->
                   <span class="error">
                     <%= error.msg %>
                   </span>
                 <% } %>
               <% }) %>
             <% } %>
+            <!-- if vision object exists, display vision description in the textarea field -->
             <textarea
               name="description"
               id="description"
