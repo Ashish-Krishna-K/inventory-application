@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "firstbuild": "npm install",
     "build": "rimraf dist && npx tsc && cp -r src/views/ dist/",
     "prestart": "npm run build",
-    "start": "NODE_ENV = production node ./bin/www",
+    "start": "DEBUG=inventory-application:* node ./bin/www",
     "lint": "eslint src/**/*.ts --fix && npm run format",
     "format": "prettier . --write",
     "preserve": "npm run build",
