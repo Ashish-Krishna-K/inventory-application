@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "firstBuild": "npm install && npx tsc && cp -r src/views/ dist/",
     "build": "rimraf dist && npx tsc && cp -r src/views/ dist/",
     "prestart": "npm run build",
     "start": "NODE_ENV = production node ./bin/www",
