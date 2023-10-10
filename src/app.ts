@@ -4,6 +4,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
+import compression from 'compression';
 import helmet from 'helmet';
 import RateLimit from 'express-rate-limit';
 
@@ -36,6 +37,7 @@ const limiter = RateLimit({
 // Apply rate limiter to all requests
 app.use(limiter);
 app.use(helmet());
+app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
